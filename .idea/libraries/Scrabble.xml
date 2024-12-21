@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Scrabble">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/ScrabbleSwing/out/artifacts/Scrabble_jar/Scrabble.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ScrabbleSwing:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ScrabbleSwing_jar</output-path>
+    <root id="archive" name="ScrabbleSwing.jar">
+      <element id="module-output" name="ScrabbleSwing" />
+    </root>
+  </artifact>
+</component>
