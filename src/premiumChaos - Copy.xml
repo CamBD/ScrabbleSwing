@@ -1,0 +1,103 @@
+<premiumSquares>
+    <premiumSquare type="tripleWord">
+        <coordinate row="0" col="0"/>
+        <coordinate row="1" col="3"/>
+        <coordinate row="2" col="12"/>
+        <coordinate row="4" col="8"/>
+        <coordinate row="5" col="5"/>
+        <coordinate row="6" col="14"/>
+        <coordinate row="7" col="2"/>
+        <coordinate row="8" col="11"/>
+        <coordinate row="9" col="6"/>
+        <coordinate row="10" col="3"/>
+        <coordinate row="11" col="7"/>
+        <coordinate row="12" col="9"/>
+        <coordinate row="13" col="4"/>
+        <coordinate row="14" col="14"/>
+        <coordinate row="14" col="0"/>
+    </premiumSquare>
+
+    <premiumSquare type="doubleWord">
+        <coordinate row="0" col="4"/>
+        <coordinate row="1" col="9"/>
+        <coordinate row="2" col="6"/>
+        <coordinate row="3" col="12"/>
+        <coordinate row="4" col="2"/>
+        <coordinate row="5" col="14"/>
+        <coordinate row="6" col="8"/>
+        <coordinate row="7" col="0"/>
+        <coordinate row="8" col="13"/>
+        <coordinate row="9" col="2"/>
+        <coordinate row="10" col="10"/>
+        <coordinate row="11" col="5"/>
+        <coordinate row="12" col="0"/>
+        <coordinate row="13" col="11"/>
+        <coordinate row="14" col="8"/>
+    </premiumSquare>
+
+    <premiumSquare type="tripleLetter">
+        <coordinate row="0" col="2"/>
+        <coordinate row="1" col="10"/>
+        <coordinate row="2" col="8"/>
+        <coordinate row="3" col="5"/>
+        <coordinate row="4" col="11"/>
+        <coordinate row="5" col="1"/>
+        <coordinate row="6" col="13"/>
+        <coordinate row="7" col="6"/>
+        <coordinate row="8" col="0"/>
+        <coordinate row="9" col="12"/>
+        <coordinate row="10" col="4"/>
+        <coordinate row="11" col="8"/>
+        <coordinate row="12" col="3"/>
+        <coordinate row="13" col="7"/>
+        <coordinate row="14" col="9"/>
+        <coordinate row="1" col="7"/>
+        <coordinate row="3" col="1"/>
+        <coordinate row="5" col="10"/>
+        <coordinate row="7" col="13"/>
+        <coordinate row="9" col="4"/>
+        <coordinate row="11" col="0"/>
+        <coordinate row="13" col="2"/>
+        <coordinate row="0" col="13"/>
+        <coordinate row="6" col="3"/>
+        <coordinate row="8" col="9"/>
+        <coordinate row="2" col="4"/>
+        <coordinate row="10" col="14"/>
+        <coordinate row="12" col="6"/>
+        <coordinate row="4" col="0"/>
+        <coordinate row="14" col="11"/>
+    </premiumSquare>
+
+    <premiumSquare type="doubleLetter">
+        <coordinate row="0" col="6"/>
+        <coordinate row="1" col="12"/>
+        <coordinate row="2" col="3"/>
+        <coordinate row="3" col="9"/>
+        <coordinate row="4" col="5"/>
+        <coordinate row="5" col="11"/>
+        <coordinate row="6" col="0"/>
+        <coordinate row="7" col="8"/>
+        <coordinate row="8" col="14"/>
+        <coordinate row="9" col="7"/>
+        <coordinate row="10" col="2"/>
+        <coordinate row="11" col="4"/>
+        <coordinate row="12" col="10"/>
+        <coordinate row="13" col="1"/>
+        <coordinate row="14" col="13"/>
+        <coordinate row="2" col="7"/>
+        <coordinate row="6" col="10"/>
+        <coordinate row="8" col="4"/>
+        <coordinate row="10" col="12"/>
+        <coordinate row="3" col="0"/>
+        <coordinate row="5" col="13"/>
+        <coordinate row="1" col="5"/>
+        <coordinate row="13" col="9"/>
+        <coordinate row="11" col="13"/>
+        <coordinate row="0" col="8"/>
+        <coordinate row="4" col="6"/>
+        <coordinate row="9" col="0"/>
+        <coordinate row="7" col="12"/>
+        <coordinate row="14" col="3"/>
+        <coordinate row="12" col="8"/>
+    </premiumSquare>
+</premiumSquares>
