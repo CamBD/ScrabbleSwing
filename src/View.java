@@ -14,12 +14,15 @@ class View implements Serializable {
     private JMenu options;
     private JMenu premiumLayout;
     private JMenu timerCount;
+    private JMenuItem scores, p1, p2, p3, p4;
     private List<Point> tilesPlacedThisTurn = new ArrayList<>();
     private JPanel directionPanel;
     private int targetRow;
     private int targetCol;
     private boolean first_letter = true; // is the current player placing their first tile
 
+    private JMenuItem exit;
+    private JMenuItem reset;
     private boolean isVertical;
 
     private static final long serialVersionUID = 1L;
@@ -168,7 +171,10 @@ class View implements Serializable {
     public JFrame getFrame(){
         return frame;
     }
-
+    public JMenuItem getExitMenu(){ return exit; }
+    public JMenuItem getResetMenu(){
+        return reset;
+    }
 
 
 
@@ -208,6 +214,13 @@ class View implements Serializable {
         options.add(saveMenuItem);
         options.add(loadMenuItem);
 
+        exit = new JMenuItem("Exit");
+        reset = new JMenuItem("Reset");
+        options.addSeparator();
+        options.add(reset);
+        options.add(exit);
+
+
         premiumLayout = new JMenu("Premium Layout");
         defaultLayout = new JMenuItem("Default Scrabble Layout");
         chaosLayout = new JMenuItem("Chaos Layout");
@@ -217,6 +230,7 @@ class View implements Serializable {
         premiumLayout.add(ringLayout);
         menu.add(premiumLayout);
 
+
         //<bonus>
         timerCount = new JMenu("Timed Mode");
         timerCount.setOpaque(true); // Make background visible
@@ -225,6 +239,20 @@ class View implements Serializable {
         timerCount.add(timerON);
         menu.add(timerCount);
         //</bonus>
+
+
+        scores = new JMenu("Scores:     ");
+        scores.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        p1 = new JMenuItem("Player 1: " + model.getPlayers()[0].getPoints());
+        p1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        p2 = new JMenuItem("Player 2: " + model.getPlayers()[1].getPoints());
+        p2.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        p3 = new JMenuItem("Player 3: " + model.getPlayers()[2].getPoints());
+        p3.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        p4 = new JMenuItem("Player 4: " + model.getPlayers()[3].getPoints());
+        p4.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+
+        menu.add(new JMenu("                   ")); menu.add(scores);menu.add(p1); menu.add(p2); menu.add(p3); menu.add(p4);
 
 
         defaultLayout.setEnabled(false);
@@ -241,8 +269,8 @@ class View implements Serializable {
 
         updateHandPanel();
 
-        // initialize ai_turn button;
 
+        // initialize ai_turn button;
         ai_turn = new JButton("Play AI Turn!");
         ai_turn.setFont(new Font("Dialog", Font.PLAIN, 24));
         // Initialize the direction buttons
@@ -254,8 +282,8 @@ class View implements Serializable {
         directionPanel.add(verticalButton);
         directionPanel.add(horizontalButton);
 
-        buttons = new CustomButton[15][15];
 
+        buttons = new CustomButton[15][15];
         for (int row = 0; row < 15; row++) {
             for (int col = 0; col < 15; col++) {
                 buttons[row][col] = new CustomButton();
@@ -263,14 +291,9 @@ class View implements Serializable {
                 buttons[row][col].setEnabled(false);
                 buttons[row][col].setRow(row);
                 buttons[row][col].setCol(col);
-
-
                 clickedRow = buttons[row][col].getRow();
-
-
                 clickedRow = row; // Since 'row' is accessible in this scope
                 clickedCol = col; // Since 'col' is accessible in this scope
-
             }
         }
 
@@ -320,6 +343,7 @@ class View implements Serializable {
         for (int i = 0; i < 7; i++) {
             try {
                 handButtons[i].setText(Character.toString(model.getCurrentPlayer().getHand().get(i).getLetter()));
+                handButtons[i].setFont(new Font("Times New Roman", Font.BOLD, 40));
                 handButtons[i].setEnabled(handButtons[i].isEnabled());
             } catch (IndexOutOfBoundsException e) {
                 handButtons[i].setText(" ");
@@ -363,10 +387,8 @@ class View implements Serializable {
         }
     }
 
-
-
     /**
-     * Updates the board view with the current state of the tiles.
+     * Sets the board to its true model state
      */
     public void updateView() {
         for (int row = 0; row < 15; row++) {
@@ -397,28 +419,60 @@ class View implements Serializable {
             }
         }
         setBonusIcon(7,7,"START");
+        updatePlayerScoreboard();
         frame.revalidate();
         frame.repaint();
     }
 
+    private void updatePlayerScoreboard() {
+        p1.setText("Player 1: " + model.getPlayers()[0].getPoints());
+        p2.setText("Player 2: " + model.getPlayers()[1].getPoints());
+        p3.setText("Player 3: " + model.getPlayers()[2].getPoints());
+        p4.setText("Player 4: " + model.getPlayers()[3].getPoints());
+        switch (model.getPlayerIndex()) {
+            case 0:
+                p4.setBackground(null);
+                p1.setBackground(Color.YELLOW);
+                break;
+            case 1:
+                p1.setBackground(null);
+                p2.setBackground(Color.YELLOW);
+                break;
+            case 2:
+                p2.setBackground(null);
+                p3.setBackground(Color.YELLOW);
+                break;
+            case 3:
+                p3.setBackground(null);
+                p4.setBackground(Color.YELLOW);
+                break;
+        }
+    }
+    /**
+     * Sets the bonus icon for a tile on the board.
+     *
+     * @param row   the row of the tile
+     * @param col   the column of the tile
+     * @param bonus the bonus type of the tile
+     */
     private void setBonusIcon(int row, int col, String bonus) {
         String imagePath = "";
 
         switch (bonus) {
             case "TW":
-                imagePath = "resources/TripleWord.png";
+                imagePath = "resources/PremiumTilePNG/TripleWord.png";
                 break;
             case "TL":
-                imagePath = "resources/TripleLetter.png";
+                imagePath = "resources/PremiumTilePNG/TripleLetter.png";
                 break;
             case "DW":
-                imagePath = "resources/DoubleWord.png";
+                imagePath = "resources/PremiumTilePNG/DoubleWord.png";
                 break;
             case "DL":
-                imagePath = "resources/DoubleLetter.png";
+                imagePath = "resources/PremiumTilePNG/DoubleLetter.png";
                 break;
             case "START":
-                imagePath = "resources/Start.png";
+                imagePath = "resources/PremiumTilePNG/Star.png";
                 break;
         }
 

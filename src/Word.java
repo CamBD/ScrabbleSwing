@@ -34,7 +34,7 @@ public class Word implements Serializable{
      * If the file cannot be read, the IOException is caught and printed.
      */
     public void createWordBank(){
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/WordBank.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/WordBank.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 wordBank.add(line.toLowerCase().trim());

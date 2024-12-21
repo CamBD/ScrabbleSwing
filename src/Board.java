@@ -32,7 +32,7 @@ public class Board implements Serializable {
             }
         }
         board[7][7] = tile; // Place the specified tile at the center
-        setPremiumLayout("src/premiumDefault.xml");
+        setPremiumLayout("resources/PremiumLayouts/premiumDefault.xml");
 
     }
 

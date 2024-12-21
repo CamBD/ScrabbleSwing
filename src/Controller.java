@@ -54,6 +54,17 @@ public abstract class Controller implements ActionListener {
 
         view.getSaveMenuItem().addActionListener(e -> saveGame());
         view.getLoadMenuItem().addActionListener(e -> loadGame());
+
+        view.getExitMenu().addActionListener(e -> System.exit(0));
+        view.getResetMenu().addActionListener(ActionListener -> {
+            view.getFrame().dispose();
+            Controller controller = new Controller() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("g");
+                }
+            };
+        });
         
         view.getDefaultLayout().addActionListener(e->defaultLayout());
         view.getChaosLayout().addActionListener(e->chaosLayout());
@@ -72,7 +83,7 @@ public abstract class Controller implements ActionListener {
 
     private void saveGame() {
         try (ObjectOutputStream oos = new ObjectOutputStream(
-                new FileOutputStream("src/savedGame.txt"))) {
+                new FileOutputStream("resources/savedGame.txt"))) {
             oos.writeObject(model);
             JOptionPane.showMessageDialog(view.getFrame(),
                     "Game saved successfully!", "Save Game", JOptionPane.INFORMATION_MESSAGE);
@@ -84,7 +95,7 @@ public abstract class Controller implements ActionListener {
 
     private void loadGame() {
         try (ObjectInputStream ois = new ObjectInputStream(
-                new FileInputStream("src/savedGame.txt"))) {
+                new FileInputStream("resources/savedGame.txt"))) {
             model = (Game) ois.readObject(); //restore the saved game object
             view.setModel(model); //set the view back to this model
 
@@ -148,6 +159,8 @@ public abstract class Controller implements ActionListener {
                     view.getTimerCount().setText("Time's up!");
                     view.getTimerCount().setBackground(Color.RED);
                     view.getTimerCount().setForeground(Color.WHITE);
+                    JOptionPane.showMessageDialog(view.getFrame(), "Time's up! Your turn is being skipped.");
+
                     skip(e);
                     //skip();
                     view.getTimerCount().setBackground(new JMenu().getBackground());
@@ -165,7 +178,7 @@ public abstract class Controller implements ActionListener {
 
     private void ringLayout() {
         if(model.start()) {
-            model.getBoard().setPremiumLayout("src/premiumRing.xml");
+            model.getBoard().setPremiumLayout("resources/PremiumLayouts/premiumRing.xml");
             view.getChaosLayout().setEnabled(true);
             view.getDefaultLayout().setEnabled(true);
             view.getRingLayout().setEnabled(false);
@@ -185,7 +198,7 @@ public abstract class Controller implements ActionListener {
 
     private void chaosLayout() {
         if(model.start()) {
-            model.getBoard().setPremiumLayout("src/premiumChaos.xml");
+            model.getBoard().setPremiumLayout("resources/PremiumLayouts/premiumChaos.xml");
             view.getChaosLayout().setEnabled(false);
             view.getDefaultLayout().setEnabled(true);
             view.getRingLayout().setEnabled(true);
@@ -205,7 +218,7 @@ public abstract class Controller implements ActionListener {
 
     private void defaultLayout() {
         if(model.start()) {
-            model.getBoard().setPremiumLayout("src/premiumDefault.xml");
+            model.getBoard().setPremiumLayout("resources/PremiumLayouts/premiumDefault.xml");
             view.getChaosLayout().setEnabled(true);
             view.getDefaultLayout().setEnabled(false);
             view.getRingLayout().setEnabled(true);
@@ -361,9 +374,7 @@ public abstract class Controller implements ActionListener {
             if (model.play(view.getInputWord().toLowerCase(), view.getDirection(), view.getTargetRow(), view.getTargetCol())) {
                 timer.stop();
                 System.out.println("Input word " + view.getInputWord() + " Row: " + view.getTargetRow() + " Col: " + view.getTargetCol() + " Dir:" + view.getDirection());
-                JOptionPane.showMessageDialog(view.getFrame(), "Submitted word: " + view.getInputWord() + "\nIt is now " + model.getCurrentPlayer().getName() + "'s turn. They have " + model.getCurrentPlayer().getPoints() + " points.");
 
-                showScores(); // Show player scores here
                 if(!view.getTimerON().isEnabled()){
                     timerMode();
                 }
@@ -409,10 +420,6 @@ public abstract class Controller implements ActionListener {
         view.getHorizontalButton().setEnabled(true);
         view.getVerticalButton().setEnabled(true);
         view.updateView();
-//        view.updateScoreboard(model.player);
-
-        JOptionPane.showMessageDialog(view.getFrame(), "Skipping turn. It is now " + model.getCurrentPlayer().getName() + "'s turn. They have " + model.getCurrentPlayer().getPoints() + " points.");
-        showScores(); // Shows player scores
         view.updateHandPanel();
         if(!view.getTimerON().isEnabled()){
             timerMode();
@@ -439,8 +446,6 @@ public abstract class Controller implements ActionListener {
         view.updateView();
         view.setInputWord("");
 
-        JOptionPane.showMessageDialog(view.getFrame(), "Word placed automatically!\nIt is now " + model.getCurrentPlayer().getName() + "'s turn.");
-        showScores(); // Show player scores here
         view.updateHandPanel();
         if(!view.getTimerON().isEnabled()){
             timerMode();
@@ -524,20 +529,6 @@ public abstract class Controller implements ActionListener {
         frame.setVisible(true);
     }
 
-    /**
-     * Display the current scores of all players in a message box.
-     */
-    private void showScores() {
-        StringBuilder scoreMessage = new StringBuilder("Current Scores:\n");
-        for (Player player : model.player) {
-            scoreMessage.append(player.getName())
-                    .append(": ")
-                    .append(player.getPoints())
-                    .append(" points\n");
-        }
-        JOptionPane.showMessageDialog(view.getFrame(), scoreMessage.toString(), "Player Scores", JOptionPane.INFORMATION_MESSAGE);
-    }
-
     public void saveState() {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(baos)) {
@@ -557,7 +548,6 @@ public abstract class Controller implements ActionListener {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        showScores();
     }
 
     private byte[] serializeCurrentState() {
