@@ -29,12 +29,12 @@ This project is a simplified implementation of the Scrabble game using **Java**.
 
 ---
 
-## Timer Mode (Bonus Feature)
+## Timer Mode
 This mode is for players who want a challenge.  
 Play your turn within 30 seconds or get skipped!  
 Timer mode can be activated & deactivated at any  
 time in the menu bar.  
-(P.S code logic for bonus timer is annotated in Controller Class) 
+ 
 
 ---
 
@@ -67,7 +67,7 @@ The Scrabble game features an AI player that follows a strategic decision-making
 
 - **Word Validation**  
   - Words are validated against a dictionary file (`WordBank.txt`).
-
+  - Invalid words prompt the player to try again.
 - **Score Calculation**  
   - Tiles have point values according to **Scrabble rules**.
   - Bonus points are awarded for placing all 7 tiles in one turn (Bingo).
@@ -120,5 +120,11 @@ All copyrights, trademarks, and intellectual property related to **Scrabble** be
 ---
 
 ## **Contributors**
- - NULL
+ - Primary author: Cameron Bodkin-Dick  
+Special thanks to classmates:  
+ - Jad Hamzeh  
+ - Jared St. Louis  
+ - Jake Swann  
+Who helped with several of the game functions, specifically with the AI turn progression,
+save/load from file, action listener logic, and many design choices.  
 ---
