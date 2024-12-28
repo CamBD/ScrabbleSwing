@@ -25,13 +25,13 @@ public class Board implements Serializable {
      *
      * @param tile The Tile to be placed at the center of the board (position 7,7).
      */
-    public Board(Tile tile){
+    public Board(){
         for (int row = 0; row < 15; row++) {
             for (int col = 0; col < 15; col++) {
                 board[row][col] = new Tile(' '); // Initialize with blank tiles
             }
         }
-        board[7][7] = tile; // Place the specified tile at the center
+
         setPremiumLayout("resources/PremiumLayouts/premiumDefault.xml");
 
     }

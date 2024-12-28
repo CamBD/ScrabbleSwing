@@ -50,12 +50,7 @@ public class Game implements Serializable {
         this.tilePile = new TilePile();
         this.initializeTiles();
         this.initializePlayer();
-        Tile temp = tilePile.deleteTile();
-        while (temp.getLetter() == '*') { // make sure centre tile isn't blank tile
-            tilePile.addTile('*', 1);
-            temp = tilePile.deleteTile();
-        }
-        this.board = new Board(temp);
+        this.board = new Board();
         this.check = new Word();
         this.view = new View(this);
     }
@@ -574,7 +569,6 @@ public class Game implements Serializable {
         char direction = 'V';
         int row = 0;
         int col = 0;
-
 
         for (WordInfo word : wordList) {
             // Horizontal Case

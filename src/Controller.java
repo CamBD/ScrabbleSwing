@@ -355,7 +355,9 @@ public abstract class Controller implements ActionListener {
             if ((row > 0 && model.getBoard().getTile(row - 1, col).getLetter() != ' ') || // Above
                     (row < 14 && model.getBoard().getTile(row + 1, col).getLetter() != ' ') || // Below
                     (col > 0 && model.getBoard().getTile(row, col - 1).getLetter() != ' ') || // Left
-                    (col < 14 && model.getBoard().getTile(row, col + 1).getLetter() != ' ')) { // Right
+                    (col < 14 && model.getBoard().getTile(row, col + 1).getLetter() != ' ') ||
+                    (row == 7 && col == 7)) { // Right
+                System.out.println("workn");
                 isTouchingExistingLetter = true;
                 break;
             }
@@ -398,6 +400,7 @@ public abstract class Controller implements ActionListener {
         view.setBeforeStart(true);
         view.updateView();
         view.setInputWord("");
+        view.clearTilesPlacedThisTurn();
 //        view.updateScoreboard(model.player);
         view.refreshHandPanel(false);
     }

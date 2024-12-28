@@ -326,7 +326,7 @@ class View implements Serializable {
         frame.add(skipPannel,BorderLayout.EAST);
         frame.pack();
         frame.setVisible(true);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setJMenuBar(menu);
         updateView();
     }

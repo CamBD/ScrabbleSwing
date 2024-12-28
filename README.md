@@ -33,8 +33,7 @@ This project is a simplified implementation of the Scrabble game using **Java**.
 This mode is for players who want a challenge.  
 Play your turn within 30 seconds or get skipped!  
 Timer mode can be activated & deactivated at any  
-time in the menu bar.  
- 
+time in the menu bar.   
 
 ---
 
